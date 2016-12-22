@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Avis</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Avis" />
+	<meta name="keywords" content="Avis" />
+	<meta name="author" content="Cloud Team" />
+<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+    <style>
+		#tag_container{
+			display: inline-block;
+		}
+		.myTag{
+			cursor: pointer;
+			background: #EFB28C;
+			border-radius: 10%;
+			padding: 5px;
+		}
+	</style>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+  	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Merriweather:300,400italic,300italic,400,700italic' rel='stylesheet' type='text/css'>
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/static/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/static/css/icomoon.css">
+	<!-- Simple Line Icons -->
+	<link rel="stylesheet" href="/static/css/simple-line-icons.css">
+	<!-- Datetimepicker -->
+	<link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">
+	<!-- Flexslider -->
+	<link rel="stylesheet" href="/static/css/flexslider.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+
+	<link rel="stylesheet" href="/static/css/style.css">
+
+
+	<!-- Modernizr JS -->
+	<script src="/static/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyC0HM8yvrxNK1EcNfxeczoDA5HwGORYAc0&sensor=false" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" ></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0HM8yvrxNK1EcNfxeczoDA5HwGORYAc0&sensor=false&callback=init()"></script>-->
+	<body>
+
+	<div id="fh5co-container">
+		<div id="fh5co-home" class="js-fullheight" data-section="home">
+
+			<div class="flexslider">
+
+				<div class="fh5co-overlay"></div>
+				<div class="fh5co-text">
+					<div class="container">
+						<div class="row">
+							<h1 class="to-animate">Avis</h1>
+							<h2 class="to-animate">Designed <span>by</span> Cloud FoodeeTrendz Team</h2>
+						</div>
+					</div>
+				</div>
+			  	<ul class="slides">
+			   	<li style="background-image: url(/static/images/slide_1.jpg);" data-stellar-background-ratio="0.5"></li>
+			   	<li style="background-image: url(/static/images/slide_2.jpg);" data-stellar-background-ratio="0.5"></li>
+			   	<li style="background-image: url(/static/images/slide_3.jpg);" data-stellar-background-ratio="0.5"></li>
+			  	</ul>
+			</div>
+		</div>
+
+		<div class="js-sticky">
+			<div class="fh5co-main-nav">
+				<div class="container-fluid ">
+					<div class="fh5co-logo">
+
+						<a style="padding-left:700px;" href="index.html">Avis</a>
+					</div>
+                </div>
+			</div>
+		</div>
+
+		<div id="gConnect" >
+            <div id="fh5co-about" data-section="about">
+			    <div class="fh5co-2col fh5co-text fh5co-bg to-animate-2" style="background-image: url(/static/images/res_img_1.jpg)">
+                    <h2 class="heading to-animate">About Us</h2>
+				    <p class="to-animate"><span class="firstcharacter">W</span>e are here to make it easier for you !!<br>Shall I get sandwich or chicken wings at KFC ????<br>Does this question haunt you everyday.??!!!!
+                    <br> Login and check what your fellow restuarant visiters feel about your selected restuarant  </p>
+                </div>
+			    <div class="fh5co-2col fh5co-text">
+				    <h2 class="heading to-animate">Developers</h2>
+                    <p><br> Developed by <br>Ashmita Gopal ,Tianmeng Ren ,Xi Chen ,Xingling Huang<br></p>
+                    <p class="sub-heading to-animate" style="padding-left:115px">Click on the map and explore restuarants</p>
+			    </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                $('.myTag').click(function(){
+                    var status = $(this).attr('chosen');
+                    if(status == 'true'){
+                        $(this).css('background', "#EFB28C").attr('chosen', 'false');
+                    }
+                    else{
+                        $(this).css('background', "#454545").attr('chosen', 'true');
+                    }
+                })
+            })
+            function submitToBackend(){
+                var toSubmit = [];
+                $('#tag_container').children('.myTag').each(function(){
+                    if($(this).attr('chosen') == 'true'){
+                        toSubmit.push($(this).attr('value'));
+                    }
+                });
+                var d = {'tags':JSON.stringify(toSubmit)};
+                var url = $(location).attr('origin') + '/tags';
+                $.post(url, data=d, function(data, status){
+                });
+                window.location = 'search';
+            }
+        </script>
+
+        <div id='tag_container'>
+            {% for post in posts %}
+            <b class='myTag' value='{{post}}' chosen='false' >{{post}}</b>&nbsp;&nbsp;
+            {% endfor %}
+        </div>
+
+        <button id='confirm' onclick='submitToBackend()'>submit</button>
+
+
+        <div id="fh5co-sayings">
+			<div class="container">
+				<div class="row to-animate">
+
+					<div class="flexslider">
+						<ul class="slides">
+
+							<li>
+								<blockquote>
+									<p>&ldquo;How nice it would be to breeze through life and just brush things off. I never read reviews because I hate to lose more than I like to win; I experience negative emotions far greater than positive ones.&rdquo;</p>
+									<p class="quote-author">&mdash; Catherine Tate</p>
+								</blockquote>
+							</li>
+							<li>
+								<blockquote>
+									<p>&ldquo;The whole purpose of annual reviews is to keep you abreast of whether or not you are fulfilling the requirements of tenure.&rdquo;</p>
+									<p class="quote-author">&mdash; Norman Finkelstein</p>
+								</blockquote>
+							</li>
+							<li>
+								<blockquote>
+									<p>&ldquo;I'm plagued with indecision in my life. I can't figure out what to order in a restaurant.&rdquo;</p>
+									<p class="quote-author">&mdash; Chuck Close</p>
+								</blockquote>
+							</li>
+							<li>
+								<blockquote>
+									<p>&ldquo;Despite sultry lighting from oversize lanterns,place has all charm of conference room .&rdquo;</p>
+									<p class="quote-author">&mdash; Shang</p>
+								</blockquote>
+							</li>
+
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+        <div id="fh5co-footer">
+            <div class="container">
+                <div class="row row-padded">
+                    <div class="col-md-12 text-center">
+                        <p class="to-animate">&copy; 2016 Avis.</p>
+                        <p class="text-center to-animate"><a href="#" class="js-gotop">Go To Top</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+	</div>
+	<!-- jQuery -->
+	<!--<script src="/static/js/jquery.min.js"></script>-->
+
+	<!-- jQuery Easing -->
+	<script src="/static/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/static/js/bootstrap.min.js"></script>
+	<!-- Bootstrap DateTimePicker -->
+	<script src="/static/js/moment.js"></script>
+	<script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Waypoints -->
+	<script src="/static/js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="/static/js/jquery.stellar.min.js"></script>
+
+	<!-- Flexslider -->
+	<script src="/static/js/jquery.flexslider-min.js"></script>
+	<script>
+		$(function () {
+	       $('#date').datetimepicker();
+	   });
+	</script>
+	<!-- Main JS -->
+	<script src="/static/js/main.js"></script>
+   </body>
+</html>
