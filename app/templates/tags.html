@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>demo</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+		#tag_container{
+			display: inline-block;
+		}
+		
+		.myTag{
+			cursor: pointer;
+			background: blue;
+			border-radius: 10%;
+			padding: 5px;
+		}
+	</style>
+
+	<script>
+		$(document).ready(function(){
+			$('.myTag').click(function(){
+				var status = $(this).attr('chosen');
+				if(status == 'true'){
+					$(this).css('background', "blue").attr('chosen', 'false');
+				}
+				else{
+					$(this).css('background', "red").attr('chosen', 'true');
+				}
+			})
+		})
+
+		function submitToBackend(){
+			var toSubmit = [];
+
+			$('#tag_container').children('.myTag').each(function(){
+				if($(this).attr('chosen') == 'true'){
+					toSubmit.push($(this).attr('value'));
+				}
+			});
+
+			console.log(toSubmit);
+
+		    $.post("/tags", toSubmit, function(data, status){
+		    	document.getElementById("tag_container").innerHTML="";
+		    });
+		}
+	</script>
+</head>
+<body>
+	<div id='tag_container'>
+		{{posts}}
+		{% for post in posts %}
+		<b class='myTag' value='{{post.name}}' chosen='false' >{{post.name}}</b>
+		{% endfor %}
+	</div>
+
+	<button id='confirm' onclick='submitToBackend()'>submit</button>
+</body>
+</html>
