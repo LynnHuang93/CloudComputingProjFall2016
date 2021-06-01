@@ -26,7 +26,7 @@ s3transfer==0.1.9
 six==1.10.0
 ssh==1.8.0
 tweepy==3.5.0
-urllib3==1.19.1
+urllib3==1.26.5
 watson-developer-cloud==0.22.0
 Flask-OAuthlib==0.9.3
 Werkzeug==0.11.11
